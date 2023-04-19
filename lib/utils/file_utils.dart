@@ -41,6 +41,8 @@ class FileUtils {
     }
   }
 
+  String getTemplateConfigPath() => "${getCurrentPath()}/assets_cleaner.yaml";
+
   /// Get list of excluded extensions from config
   List<String> getExcludeExtension() => config?['exclude-extension'] != null ? _getListFromYamlList(config?['exclude-extension'] as YamlList) : [];
   /// Get list of excluded file from config

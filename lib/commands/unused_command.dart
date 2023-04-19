@@ -16,7 +16,7 @@ class UnusedCommand extends Command {
   void run() async {
     /// Get list of unused assets from 
     /// lib folder and read .dart file code
-    List<UnusedAssetModel> unusedAssets = await AssetServices().getUnusedAssets();
+    List<UnusedAssetModel> unusedAssets = await AssetServices.instance.getUnusedAssets();
     if (unusedAssets.isEmpty) return;
 
     print("-----------------------------");

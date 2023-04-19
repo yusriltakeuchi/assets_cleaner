@@ -1,39 +1,56 @@
-<!-- 
-This README describes the package. If you publish this package to pub.dev,
-this README's contents appear on the landing page for your package.
+# Assets Cleaner
 
-For information about how to write a good package README, see the guide for
-[writing package pages](https://dart.dev/guides/libraries/writing-package-pages). 
+A command-line tool wich helps you to clean your assets folder. It will remove all files that are not used in your project. You can choose to remove all files or just to see which files are not being used.
+This tool support for any assets extensions from your [assets] folder. But you must specify which folder you want to clean.
 
-For general information about developing packages, see the Dart guide for
-[creating packages](https://dart.dev/guides/libraries/create-library-packages)
-and the Flutter guide for
-[developing packages and plugins](https://flutter.dev/developing-packages). 
--->
+## :book: Guide
 
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
-
-## Features
-
-TODO: List what your package can do. Maybe include images, gifs, or videos.
-
-## Getting started
-
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
-
-## Usage
-
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder. 
-
-```dart
-const like = 'sample';
+### 1. Installation
+#### Pub Global
+Works with macOS, Linux and Windows.
+    
+```shell
+$ dart pub global activate assets_cleaner
 ```
 
-## Additional information
+### 2. Setup the config file
 
-TODO: Tell users more about the package: where to find more information, how to 
-contribute to the package, how to file issues, what response they can expect 
-from the package authors, and more.
+Run the initialization command to create the config file. This command will create a file named `assets_cleaner.yaml` in your project root directory.
+
+```shell
+$ assets_cleaner init
+```
+
+After that, you can edit the config file to exclude some files or extensions that you don't want to be scanned.
+An example is shown below.
+
+```yaml
+config:
+  # If you want to exclude specific
+  # extension
+  exclude-extension:
+  #  - jpg # Uncomment this if you want to use
+  #  - png # Uncomment this if you want to use
+
+  # If you want to exclude specific
+  # file from assets
+  exclude-file:
+  #  - /assets/images/banner_upgrade.png # Uncomment this if you want to use
+  #  - /assets/images/logo.png # Uncomment this if you want to use
+```
+
+## :rocket: Usage
+
+After setting up the configuration, you can run the package by running the following command:
+
+#### Scanning all unused assets from your project
+[![Scan Unsed Assets](https://i.ibb.co/KzqpwTh/Assets-Cleaner-Unused.png)](https://i.ibb.co/KzqpwTh/Assets-Cleaner-Unused.png)
+```shell
+$ assets_cleaner unused
+```
+
+#### Scanning all unused assets from your project and remove it
+[![Scan Unsed Assets And Clean](https://i.ibb.co/s27R1tZ/Assets-Cleaner-Clean.png)](https://i.ibb.co/s27R1tZ/Assets-Cleaner-Clean.png)
+```shell
+$ assets_cleaner clean
+```

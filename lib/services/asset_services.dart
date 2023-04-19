@@ -5,6 +5,10 @@ import 'package:assets_cleaner/utils/file_utils.dart';
 
 class AssetServices {
 
+  factory AssetServices() => instance;
+  AssetServices._();
+  static final AssetServices instance = AssetServices._();
+
   /// Get list of unused assets from
   /// lib folder and read .dart file code
   Future<List<UnusedAssetModel>> getUnusedAssets() async {

@@ -4,9 +4,7 @@ import 'package:assets_cleaner/utils/file_utils.dart';
 
 class CodeUtils {
   factory CodeUtils() => instance;
-
   CodeUtils._();
-
   static final CodeUtils instance = CodeUtils._();
 
   Future<List<FileSystemEntity>> _scanCodes(Directory dir) async {
