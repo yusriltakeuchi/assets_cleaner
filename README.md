@@ -44,13 +44,13 @@ config:
 After setting up the configuration, you can run the package by running the following command:
 
 #### Scanning all unused assets from your project
-[![Scan Unsed Assets](https://i.ibb.co/KzqpwTh/Assets-Cleaner-Unused.png)](https://i.ibb.co/KzqpwTh/Assets-Cleaner-Unused.png)
+[![Scan Unsed Assets](https://i.ibb.co/xXXgpy0/Assets-Cleaner-Unused.png)](https://i.ibb.co/xXXgpy0/Assets-Cleaner-Unused.png)
 ```shell
 $ assets_cleaner unused
 ```
 
 #### Scanning all unused assets from your project and remove it
-[![Scan Unsed Assets And Clean](https://i.ibb.co/s27R1tZ/Assets-Cleaner-Clean.png)](https://i.ibb.co/s27R1tZ/Assets-Cleaner-Clean.png)
+[![Scan Unsed Assets And Clean](https://i.ibb.co/L0CK6C6/Assets-Cleaner-Clean.png)](https://i.ibb.co/L0CK6C6/Assets-Cleaner-Clean.png)
 ```shell
 $ assets_cleaner clean
 ```
