@@ -8,7 +8,7 @@ class AssetServices {
   /// Get list of unused assets from
   /// lib folder and read .dart file code
   Future<List<UnusedAssetModel>> getUnusedAssets() async {
-    String currentPath = FileUtils().getCurrentPath();
+    String currentPath = FileUtils.instance.getCurrentPath();
     final fileUtils = FileUtils();
 
     /// Read assets path from pubspec.yaml
@@ -43,7 +43,7 @@ class AssetServices {
     print("Scanning ${assets.length} assets file");
     for (var asset in assets) {
       final fileName = asset.split("/").last;
-      if (await CodeUtils().containsAsset(fileName) == false) {
+      if (await CodeUtils.instance.containsAsset(fileName) == false) {
         unusedAssets.add(UnusedAssetModel(fileName: fileName, filePath: asset));
       }
     }

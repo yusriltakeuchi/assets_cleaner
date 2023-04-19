@@ -21,7 +21,7 @@ class CleanCommand extends Command {
     print("-----------------------------");
     for (var unused in unusedAssets) {
       print("[♻️ ] Removing asset ${unused.filePath}");
-      FileUtils().deleteFile(unused.filePath.replaceFirst("/", ""));
+      FileUtils.instance.deleteFile(unused.filePath.replaceFirst("/", ""));
     }
     print("-----------------------------");
     print("Successfully delete ${unusedAssets.length} unused assets files");

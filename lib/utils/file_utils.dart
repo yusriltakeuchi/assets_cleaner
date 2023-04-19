@@ -2,10 +2,10 @@ import 'dart:io';
 import 'package:yaml/yaml.dart';
 
 class FileUtils {
-  factory FileUtils() => _instance;
+  factory FileUtils() => instance;
   FileUtils._();
 
-  static late final FileUtils _instance = FileUtils._();
+  static final FileUtils instance = FileUtils._();
   String getCurrentPath() => Directory.current.absolute.path;
   String _getPubspecPath() => "${getCurrentPath()}/pubspec.yaml";
   String _configFilePath() => "${getCurrentPath()}/assets_cleaner.yaml";
