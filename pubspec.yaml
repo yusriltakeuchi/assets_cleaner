@@ -1,6 +1,6 @@
 name: assets_cleaner
 description: A command-line tool wich helps you to clean your assets folder. It will remove all files that are not used in your project.
-version: 0.0.1+2
+version: 0.0.1+3
 homepage: https://github.com/yusriltakeuchi/assets_cleaner.git
 
 environment:
@@ -11,6 +11,10 @@ dependencies:
   path: ^1.8.0
   yaml: ^3.1.0
   logger: ^1.1.0
+
+screenshots:
+  - description: "Assets Cleaner Screenshot"
+    path: images/assets_cleaner.png
 
 executables:
   assets_cleaner: assets_cleaner
