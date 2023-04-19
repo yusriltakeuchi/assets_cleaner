@@ -1,7 +1,7 @@
 # Assets Cleaner
 
 A command-line tool wich helps you to clean your assets folder. It will remove all files that are not used in your project. You can choose to remove all files or just to see which files are not being used.
-This tool support for any assets extensions from your [assets] folder. But you must specify which folder you want to clean.
+This tool support for any assets extensions from your [assets] folder. It will automatically detect the asset location from pubspec.yaml
 
 ## :book: Guide
 
@@ -54,3 +54,8 @@ $ assets_cleaner unused
 ```shell
 $ assets_cleaner clean
 ```
+## :warning: Supporting Issue
+These tools may not work properly if you use an asset generator like flutter_gen or similar. Because our tools will still detect that your Assets are used, even if these variables are not used in the code
+
+## :star: Contributing
+If you wish to contribute a change to any of the existing plugins in this repo, please fork the repo and submit a pull request. If you have any questions, please open an issue.
