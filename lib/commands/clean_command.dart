@@ -1,4 +1,3 @@
-
 import 'package:args/command_runner.dart';
 import 'package:assets_cleaner/models/unused_asset_model.dart';
 import 'package:assets_cleaner/services/asset_services.dart';
@@ -13,9 +12,10 @@ class CleanCommand extends Command {
 
   @override
   void run() async {
-    /// Get list of unused assets from 
+    /// Get list of unused assets from
     /// lib folder and read .dart file code
-    List<UnusedAssetModel> unusedAssets = await AssetServices.instance.getUnusedAssets();
+    List<UnusedAssetModel> unusedAssets =
+        await AssetServices.instance.getUnusedAssets();
     if (unusedAssets.isEmpty) return;
 
     print("-----------------------------");
@@ -26,6 +26,5 @@ class CleanCommand extends Command {
     print("-----------------------------");
     print("Successfully delete ${unusedAssets.length} unused assets files");
     print("-----------------------------");
-
   }
 }

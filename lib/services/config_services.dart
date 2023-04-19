@@ -6,10 +6,6 @@ class ConfigServices {
   static final ConfigServices instance = ConfigServices._();
 
   Future<bool> createConfigFile() async {
-    return await _downloadFileTemplateFromGit();
-  }
-
-  Future<bool> _downloadFileTemplateFromGit() async {
     try {
       String templateUrl = "https://raw.githubusercontent.com/yusriltakeuchi/assets_cleaner/master/template/assets_cleaner.yaml";
       /// Downloading from the url and save to [path]
