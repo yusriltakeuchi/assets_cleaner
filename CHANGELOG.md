@@ -1,3 +1,8 @@
+## [20-04-2023] 0.0.1+4
+
+- Fix issue directory in Windows
+- Optimizing code
+
 ## [20-04-2023] 0.0.1+3
 
 - Updating screenshots

@@ -21,7 +21,7 @@ class CodeUtils {
   }
 
   Future<bool> containsAsset(String asset) async {
-    String currentPath = FileUtils().getCurrentPath();
+    String currentPath = FileUtils.instance.getCurrentPath;
     String libDirectory = "$currentPath/lib";
     final libCodes = await _scanCodes(Directory(libDirectory));
     

@@ -6,14 +6,16 @@ class FileUtils {
   FileUtils._();
 
   static final FileUtils instance = FileUtils._();
-  String getCurrentPath() => Directory.current.absolute.path;
-  String _getPubspecPath() => "${getCurrentPath()}/pubspec.yaml";
-  String _configFilePath() => "${getCurrentPath()}/assets_cleaner.yaml";
+  String get getCurrentPath => Directory.current.absolute.path
+      .replaceAll(r'\', '/')
+      .replaceAll('//', '/');
+  String get _getPubspecPath => "${getCurrentPath}/pubspec.yaml";
+  String get _configFilePath => "${getCurrentPath}/assets_cleaner.yaml";
   YamlMap? config;
 
   /// Get list of assets path from pubspec.yaml
   Future<List<String>> getPubspecAsset() async {
-    final pubspecFile = File(_getPubspecPath());
+    final pubspecFile = File(_getPubspecPath);
     if (await pubspecFile.exists() == true) {
       final YamlMap map = loadYaml(pubspecFile.readAsStringSync()) as YamlMap;
       final dynamic flutterMap = map['flutter'];
@@ -21,8 +23,7 @@ class FileUtils {
         final dynamic assetMap = flutterMap['assets'];
         if (assetMap is YamlList) {
           return _getListFromYamlList(assetMap);
-        } else {
-        }
+        } else {}
       }
     } else {
       print("[🚫] pubspec.yaml file not found");
@@ -32,7 +33,7 @@ class FileUtils {
 
   /// Get config from assets_cleaner.yaml
   void getConfig() {
-    final configFile = File(_configFilePath());
+    final configFile = File(_configFilePath);
     if (configFile.existsSync() == true) {
       final YamlMap map = loadYaml(configFile.readAsStringSync()) as YamlMap;
       config = map['config'];
@@ -42,9 +43,14 @@ class FileUtils {
   }
 
   /// Get list of excluded extensions from config
-  List<String> getExcludeExtension() => config?['exclude-extension'] != null ? _getListFromYamlList(config?['exclude-extension'] as YamlList) : [];
+  List<String> getExcludeExtension() => config?['exclude-extension'] != null
+      ? _getListFromYamlList(config?['exclude-extension'] as YamlList)
+      : [];
+
   /// Get list of excluded file from config
-  List<String> getExcludeFile() => config?['exclude-file'] != null ? _getListFromYamlList(config?['exclude-file'] as YamlList) : [];
+  List<String> getExcludeFile() => config?['exclude-file'] != null
+      ? _getListFromYamlList(config?['exclude-file'] as YamlList)
+      : [];
 
   /// Get list data from yaml list
   List<String> _getListFromYamlList(YamlList yamlList) {
@@ -66,9 +72,8 @@ class FileUtils {
 
   /// Load all assets from path
   Future<List<FileSystemEntity>> loadAssets(String assetsPath) async {
-    final dir = Directory("${getCurrentPath()}/$assetsPath");
+    final dir = Directory("${getCurrentPath}/$assetsPath");
     final List<FileSystemEntity> entities = await dir.list().toList();
     return entities;
   }
-
 }

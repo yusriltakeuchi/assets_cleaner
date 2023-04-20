@@ -16,7 +16,12 @@ class CleanCommand extends Command {
     /// lib folder and read .dart file code
     List<UnusedAssetModel> unusedAssets =
         await AssetServices.instance.getUnusedAssets();
-    if (unusedAssets.isEmpty) return;
+    if (unusedAssets.isEmpty) {
+      print("-----------------------------");
+      print("[✅] No unused assets found");
+      print("-----------------------------");
+      return;
+    }
 
     print("-----------------------------");
     for (var unused in unusedAssets) {
