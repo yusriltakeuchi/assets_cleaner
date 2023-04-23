@@ -1,3 +1,7 @@
+## [24-04-2023] 0.0.1+5
+
+- Fix issue directory listing failed when the path contains file name in assets
+
 ## [20-04-2023] 0.0.1+4
 
 - Fix issue directory in Windows

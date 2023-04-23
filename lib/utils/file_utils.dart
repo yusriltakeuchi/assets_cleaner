@@ -22,13 +22,49 @@ class FileUtils {
       if (flutterMap is YamlMap) {
         final dynamic assetMap = flutterMap['assets'];
         if (assetMap is YamlList) {
-          return _getListFromYamlList(assetMap);
+          List<String> assets = _getListFromYamlList(assetMap);
+          assets = assets.map((e) => clearFileNameFromPath(e)).toList();
+          return assets;
         } else {}
       }
     } else {
       print("[🚫] pubspec.yaml file not found");
     }
     return <String>[];
+  }
+
+  /// Remove file names in the last path
+  /// if the path directory contains file name
+  /// in the last path
+  String clearFileNameFromPath(String path) {
+    final fileName = _getFileNameFromPath(path);
+    if (fileName != null) {
+      return path
+          .replaceAll(fileName, "")
+          .replaceAll("$fileName/", "")
+          .replaceAll("//", "/");
+    } else {
+      return path;
+    }
+  }
+
+  String? _getFileNameFromPath(String path) {
+    // Split path into a list of directories and filename
+    List<String> pathComponents = path.split('/');
+    // Get the last component of the path, which should be the filename
+    String fileName = pathComponents.last;
+    // Check if the filename is empty or if it contains only a dot
+    if (fileName.isEmpty || fileName == '.') {
+      if (pathComponents[pathComponents.length - 2].contains(".")) {
+        return pathComponents[pathComponents.length - 2].replaceAll("/", "");
+      }
+
+      return null;
+    }
+    if (fileName.contains(".")) {
+      return fileName;
+    }
+    return null;
   }
 
   /// Get config from assets_cleaner.yaml

@@ -1,4 +1,3 @@
-
 class UnusedAssetModel {
   String fileName;
   String filePath;

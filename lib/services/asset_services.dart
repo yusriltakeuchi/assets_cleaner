@@ -17,6 +17,9 @@ class AssetServices {
     List<String> assetsPath = await fileUtils.getPubspecAsset();
     if (assetsPath.isEmpty) return [];
 
+    /// Remove duplicate assets from [assetsPath]
+    assetsPath = assetsPath.toSet().toList();
+
     /// Get config from assets_cleaner.yaml
     fileUtils.getConfig();
     if (fileUtils.config == null) return [];
