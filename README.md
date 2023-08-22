@@ -43,16 +43,23 @@ config:
 
 After setting up the configuration, you can run the package by running the following command:
 
-#### Scanning all unused assets from your project
+#### 1. Scanning all unused assets from your project
 [![Scan Unsed Assets](https://i.ibb.co/xXXgpy0/Assets-Cleaner-Unused.png)](https://i.ibb.co/xXXgpy0/Assets-Cleaner-Unused.png)
 ```shell
 $ assets_cleaner unused
 ```
 
-#### Scanning all unused assets from your project and remove it
+#### 2. Scanning all unused assets from your project and remove it
 [![Scan Unsed Assets And Clean](https://i.ibb.co/L0CK6C6/Assets-Cleaner-Clean.png)](https://i.ibb.co/L0CK6C6/Assets-Cleaner-Clean.png)
 ```shell
 $ assets_cleaner clean
+```
+
+#### 3. Scanning all unused assets and move into trash folder
+<img src="https://i.ibb.co/bQm6zZb/Screenshot-2023-08-22-135400.png" width="400">
+
+```shell
+$ assets_cleaner trash
 ```
 ## :warning: Supporting Issue
 These tools may not work properly if you use an asset generator like flutter_gen or similar. Because our tools will still detect that your Assets are used, even if these variables are not used in the code
