@@ -1,3 +1,7 @@
+## [22-08-2023] 0.0.2+6
+
+- Add features 'trash' command to move unused assets into trash folder
+
 ## [24-04-2023] 0.0.1+5
 
 - Fix issue directory listing failed when the path contains file name in assets

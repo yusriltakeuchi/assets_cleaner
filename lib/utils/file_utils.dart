@@ -112,4 +112,19 @@ class FileUtils {
     final List<FileSystemEntity> entities = await dir.list().toList();
     return entities;
   }
+
+  /// Move unused files into trash folders.
+  /// If trash folder not found then create one
+  Future<void> moveToTrash(String path) async {
+    final sourceFile = File("${getCurrentPath}/$path");
+    final trashDir = Directory("${getCurrentPath}/trash");
+    if (await trashDir.exists() == false) {
+      trashDir.create();
+    }
+    if (await sourceFile.exists()) {
+      sourceFile.renameSync(
+        "${trashDir.path}/${sourceFile.path.split('/').last}",
+      );
+    }
+  }
 }
