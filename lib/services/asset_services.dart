@@ -7,8 +7,13 @@ class AssetServices {
   AssetServices._();
   static final AssetServices instance = AssetServices._();
 
-  /// Get list of unused assets from
-  /// lib folder and read .dart file code
+  /// The function `getUnusedAssets` scans the assets in a Dart project and returns a list of unused
+  /// assets.
+  /// 
+  /// Returns:
+  /// 
+  /// The function `getUnusedAssets()` returns a `Future` that resolves to a `List` of
+  /// `UnusedAssetModel` objects.
   Future<List<UnusedAssetModel>> getUnusedAssets() async {
     String currentPath = FileUtils.instance.getCurrentPath;
     final fileUtils = FileUtils();
