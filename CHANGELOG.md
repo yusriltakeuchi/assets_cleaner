@@ -1,3 +1,7 @@
+## [23-08-2023] 0.0.2+7
+
+- Update platforms support in pubspec.yaml
+
 ## [22-08-2023] 0.0.2+6
 
 - Add features 'trash' command to move unused assets into trash folder
