@@ -1,3 +1,7 @@
+## [23-08-2023] 0.0.2+8
+
+- Increasing pub scores
+
 ## [23-08-2023] 0.0.2+7
 
 - Update platforms support in pubspec.yaml
