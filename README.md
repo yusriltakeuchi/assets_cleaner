@@ -2,7 +2,8 @@
 [![pub package](https://img.shields.io/pub/v/assets_cleaner.svg)](https://pub.dev/packages/assets_cleaner)
 
 A command-line tool wich helps you to clean your assets folder. It will remove all files that are not used in your project. You can choose to remove all files or just to see which files are not being used.
-This tool support for any assets extensions from your [assets] folder. It will automatically detect the asset location from pubspec.yaml
+This tool support for any assets extensions from your [assets] folder. It will automatically detect the asset location from pubspec.yaml.
+In the new version, we add a new feature to scan unused library in your project. You can use the command `scanlib` to scan and remove all unused dependencies from your project.
 
 ## :book: Guide
 
@@ -45,13 +46,14 @@ config:
 After setting up the configuration, you can run the package by running the following command:
 
 #### 1. Scanning all unused assets from your project
-[![Scan Unsed Assets](https://raw.githubusercontent.com/yusriltakeuchi/assets_cleaner/master/images/image_unused.png)](https://raw.githubusercontent.com/yusriltakeuchi/assets_cleaner/master/images/image_unused.png)
+<img src="https://raw.githubusercontent.com/yusriltakeuchi/assets_cleaner/master/images/image_unused.png" width="400">
 ```shell
 $ assets_cleaner unused
 ```
 
 #### 2. Scanning all unused assets from your project and remove it
-[![Scan Unsed Assets And Clean](https://raw.githubusercontent.com/yusriltakeuchi/assets_cleaner/master/images/image_clean.png)](https://raw.githubusercontent.com/yusriltakeuchi/assets_cleaner/master/images/image_clean.png)
+<img src="https://raw.githubusercontent.com/yusriltakeuchi/assets_cleaner/master/images/image_clean.png" width="400">
+
 ```shell
 $ assets_cleaner clean
 ```
@@ -68,6 +70,12 @@ $ assets_cleaner trash
 
 ```shell
 $ assets_cleaner scanlib
+```
+You can also use fast command without type any prompt
+```shell
+$ assets_cleaner scanlib -f
+or 
+$ assets_cleaner scanlib --fast
 ```
 
 ## :warning: Supporting Issue

@@ -13,8 +13,15 @@ class ScanLibCommand extends Command {
   @override
   String get name => "scanlib";
 
+  ScanLibCommand() {
+    // Add option --flag or -f
+    argParser.addFlag('fast', abbr: 'f', negatable: false, help: 'Run the scan in fast mode.');
+  }
+
   @override
   void run() async {
+    bool fastMode = argResults?['fast'] ?? false;
+
     // Memuat file pubspec.yaml
     var pubspecFile = File('pubspec.yaml');
     if (!pubspecFile.existsSync()) {
@@ -60,8 +67,12 @@ class ScanLibCommand extends Command {
       });
       print("---------------------------------------");
 
-      // Pilihan penghapusan
-      await showOptions(unusedDependencies);
+      if (fastMode) {
+        removeDependencies(unusedDependencies);
+      } else {
+        // Removing options
+        await showOptions(unusedDependencies);     
+      }
     }
   }
 
