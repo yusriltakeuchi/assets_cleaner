@@ -1,3 +1,6 @@
+## [13-09-2024] 0.1.2+8
+- Increasig pub scores
+
 ## [13-09-2024] 0.1.2+7
 - Add feature 'scanlib' command to scan unused library in project
 - Fix bug when the path not contains file name in assets

@@ -1,4 +1,3 @@
-
 import 'dart:async';
 import 'dart:io';
 
@@ -15,7 +14,8 @@ class ScanLibCommand extends Command {
 
   ScanLibCommand() {
     // Add option --flag or -f
-    argParser.addFlag('fast', abbr: 'f', negatable: false, help: 'Run the scan in fast mode.');
+    argParser.addFlag('fast',
+        abbr: 'f', negatable: false, help: 'Run the scan in fast mode.');
   }
 
   @override
@@ -71,7 +71,7 @@ class ScanLibCommand extends Command {
         removeDependencies(unusedDependencies);
       } else {
         // Removing options
-        await showOptions(unusedDependencies);     
+        await showOptions(unusedDependencies);
       }
     }
   }
@@ -119,8 +119,12 @@ class ScanLibCommand extends Command {
     }
   }
 
-  void removeDependencies(List<String> unusedDependencies, {String? selectedName}) {
-    MsgUtils.showInfo("Removing ${selectedName != null ? selectedName : 'dependencies'} from pubspec.yaml...");
+  void removeDependencies(
+    List<String> unusedDependencies, {
+    String? selectedName,
+  }) {
+    MsgUtils.showInfo(
+        "Removing ${selectedName != null ? selectedName : 'dependencies'} from pubspec.yaml...");
     var pubspecFile = File('pubspec.yaml');
     var lines = pubspecFile.readAsLinesSync();
 
@@ -136,18 +140,25 @@ class ScanLibCommand extends Command {
     }
   }
 
-  Future<void> removeSpecificDependencies(List<String> unusedDependencies) async {
+  Future<void> removeSpecificDependencies(
+      List<String> unusedDependencies) async {
     print("");
-    MsgUtils.showInfo("Select dependencies to remove (comma-separated numbers):");
+    MsgUtils.showInfo(
+        "Select dependencies to remove (comma-separated numbers):");
     print("---------------------------------------");
     unusedDependencies.asMap().forEach((i, dep) {
       MsgUtils.showList("${i + 1}. $dep");
-    }); 
+    });
     print("---------------------------------------");
 
     stdout.write("➢ Your choice: ");
     var input = stdin.readLineSync();
-    var indexes = input?.split(',').map(int.tryParse).where((n) => n != null && n > 0 && n <= unusedDependencies.length).toList() ?? [];
+    var indexes = input
+            ?.split(',')
+            .map(int.tryParse)
+            .where((n) => n != null && n > 0 && n <= unusedDependencies.length)
+            .toList() ??
+        [];
 
     if (indexes.isEmpty) {
       MsgUtils.showError("No valid dependencies selected. Exiting...");
