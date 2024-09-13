@@ -7,9 +7,9 @@ environment:
   sdk: ">=2.19.6 <=3.5.10"
 
 dependencies:
-  args: ^2.3.1
-  path: ^1.8.0
-  yaml: ^3.1.0
+  args: ^2.5.0
+  path: ^1.9.0
+  yaml: ^3.1.2
 
 platforms:
   linux:

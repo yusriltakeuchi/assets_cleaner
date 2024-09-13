@@ -76,82 +76,85 @@ class ScanLibCommand extends Command {
     }
   }
 
+  Future<bool> scanDependency(String dependency) async {
+    // Melakukan pencarian terhadap setiap file di folder lib/
+    var libDir = Directory('./lib');
+    if (!libDir.existsSync()) {
+      MsgUtils.showError("lib directory not found.");
+      return false;
+    }
 
-Future<bool> scanDependency(String dependency) async {
-  // Melakukan pencarian terhadap setiap file di folder lib/
-  var libDir = Directory('./lib');
-  if (!libDir.existsSync()) {
-    MsgUtils.showError("lib directory not found.");
-    return false;
-  }
-
-  var files = libDir.listSync(recursive: true, followLinks: false);
-  for (var file in files) {
-    if (file is File && file.path.endsWith('.dart')) {
-      var content = file.readAsStringSync();
-      if (content.contains(dependency)) {
-        return true; // Dependency ditemukan di file Dart
+    var files = libDir.listSync(recursive: true, followLinks: false);
+    for (var file in files) {
+      if (file is File && file.path.endsWith('.dart')) {
+        var content = file.readAsStringSync();
+        if (content.contains(dependency)) {
+          return true; // Dependency ditemukan di file Dart
+        }
       }
     }
-  }
-  return false; // Dependency tidak ditemukan di project
-}
-
-Future<void> showOptions(List<String> unusedDependencies) async {
-  print('What would you like to do?');
-  print('1. Remove all unused dependencies');
-  print('2. Remove specific dependencies');
-  print('3. Cancel');
-
-  stdout.write("➢ Your choice: ");
-  var input = stdin.readLineSync();
-  switch (input) {
-    case '1':
-      removeDependencies(unusedDependencies);
-      break;
-    case '2':
-      await removeSpecificDependencies(unusedDependencies);
-      break;
-    case '3':
-      MsgUtils.showInfo("Operation cancelled.");
-      break;
-    default:
-      MsgUtils.showError("Invalid option. Exiting...");
-  }
-}
-
-void removeDependencies(List<String> unusedDependencies) {
-  MsgUtils.showInfo("Removing dependencies from pubspec.yaml...");
-  var pubspecFile = File('pubspec.yaml');
-  var lines = pubspecFile.readAsLinesSync();
-
-  for (var dep in unusedDependencies) {
-    lines.removeWhere((line) => line.contains(dep));
+    return false; // Dependency tidak ditemukan di project
   }
 
-  pubspecFile.writeAsStringSync(lines.join('\n'));
-  MsgUtils.showSuccess("All unused dependencies removed");
-}
+  Future<void> showOptions(List<String> unusedDependencies) async {
+    print('What would you like to do?');
+    print('1. Remove all unused dependencies');
+    print('2. Remove specific dependencies');
+    print('3. Cancel');
 
-Future<void> removeSpecificDependencies(List<String> unusedDependencies) async {
-  print("");
-  MsgUtils.showInfo("Select dependencies to remove (comma-separated numbers):");
-  print("---------------------------------------");
-  unusedDependencies.asMap().forEach((i, dep) {
-    MsgUtils.showList("${i + 1}. $dep");
-  }); 
-  print("---------------------------------------");
-
-  stdout.write("➢ Your choice: ");
-  var input = stdin.readLineSync();
-  var indexes = input?.split(',').map(int.tryParse).where((n) => n != null && n > 0 && n <= unusedDependencies.length).toList() ?? [];
-
-  if (indexes.isEmpty) {
-    MsgUtils.showError("No valid dependencies selected. Exiting...");
-    return;
+    stdout.write("➢ Your choice: ");
+    var input = stdin.readLineSync();
+    switch (input) {
+      case '1':
+        removeDependencies(unusedDependencies);
+        break;
+      case '2':
+        await removeSpecificDependencies(unusedDependencies);
+        break;
+      case '3':
+        MsgUtils.showInfo("Operation cancelled.");
+        break;
+      default:
+        MsgUtils.showError("Invalid option. Exiting...");
+    }
   }
 
-  var selectedDeps = indexes.map((i) => unusedDependencies[i! - 1]).toList();
-    removeDependencies(selectedDeps);
+  void removeDependencies(List<String> unusedDependencies, {String? selectedName}) {
+    MsgUtils.showInfo("Removing ${selectedName != null ? selectedName : 'dependencies'} from pubspec.yaml...");
+    var pubspecFile = File('pubspec.yaml');
+    var lines = pubspecFile.readAsLinesSync();
+
+    for (var dep in unusedDependencies) {
+      lines.removeWhere((line) => line.contains(dep));
+    }
+
+    pubspecFile.writeAsStringSync(lines.join('\n'));
+    if (selectedName != null) {
+      MsgUtils.showSuccess("$selectedName removed from pubspec.yaml");
+    } else {
+      MsgUtils.showSuccess("All unused dependencies removed");
+    }
+  }
+
+  Future<void> removeSpecificDependencies(List<String> unusedDependencies) async {
+    print("");
+    MsgUtils.showInfo("Select dependencies to remove (comma-separated numbers):");
+    print("---------------------------------------");
+    unusedDependencies.asMap().forEach((i, dep) {
+      MsgUtils.showList("${i + 1}. $dep");
+    }); 
+    print("---------------------------------------");
+
+    stdout.write("➢ Your choice: ");
+    var input = stdin.readLineSync();
+    var indexes = input?.split(',').map(int.tryParse).where((n) => n != null && n > 0 && n <= unusedDependencies.length).toList() ?? [];
+
+    if (indexes.isEmpty) {
+      MsgUtils.showError("No valid dependencies selected. Exiting...");
+      return;
+    }
+
+    var selectedDeps = indexes.map((i) => unusedDependencies[i! - 1]).toList();
+    removeDependencies(selectedDeps, selectedName: selectedDeps.first);
   }
 }
