@@ -45,26 +45,26 @@ config:
 After setting up the configuration, you can run the package by running the following command:
 
 #### 1. Scanning all unused assets from your project
-[![Scan Unsed Assets](https://i.ibb.co/xXXgpy0/Assets-Cleaner-Unused.png)](https://i.ibb.co/xXXgpy0/Assets-Cleaner-Unused.png)
+[![Scan Unsed Assets](https://raw.githubusercontent.com/yusriltakeuchi/assets_cleaner/master/images/image_unused.png)](https://raw.githubusercontent.com/yusriltakeuchi/assets_cleaner/master/images/image_unused.png)
 ```shell
 $ assets_cleaner unused
 ```
 
 #### 2. Scanning all unused assets from your project and remove it
-[![Scan Unsed Assets And Clean](https://i.ibb.co/L0CK6C6/Assets-Cleaner-Clean.png)](https://i.ibb.co/L0CK6C6/Assets-Cleaner-Clean.png)
+[![Scan Unsed Assets And Clean](https://raw.githubusercontent.com/yusriltakeuchi/assets_cleaner/master/images/image_clean.png)](https://raw.githubusercontent.com/yusriltakeuchi/assets_cleaner/master/images/image_clean.png)
 ```shell
 $ assets_cleaner clean
 ```
 
 #### 3. Scanning all unused assets and move into trash folder
-<img src="https://i.ibb.co/bQm6zZb/Screenshot-2023-08-22-135400.png" width="400">
+<img src="https://raw.githubusercontent.com/yusriltakeuchi/assets_cleaner/master/images/image_trash.png" width="400">
 
 ```shell
 $ assets_cleaner trash
 ```
 
 #### 4. Scan and remove all unused dependencies from your project
-<img src="https://i.ibb.co/bQm6zZb/Screenshot-2023-08-22-135400.png" width="400">
+<img src="https://raw.githubusercontent.com/yusriltakeuchi/assets_cleaner/master/images/image_scanlib.png" width="400">
 
 ```shell
 $ assets_cleaner scanlib
