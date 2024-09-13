@@ -1,3 +1,7 @@
+## [13-09-2024] 0.1.2+7
+- Add feature 'scanlib' command to scan unused library in project
+- Fix bug when the path not contains file name in assets
+
 ## [22-08-2023] 0.0.2+6
 
 - Add features 'trash' command to move unused assets into trash folder

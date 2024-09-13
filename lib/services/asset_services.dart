@@ -20,6 +20,8 @@ class AssetServices {
 
     /// Read assets path from pubspec.yaml
     List<String> assetsPath = await fileUtils.getPubspecAsset();
+    /// Remove if path not start with assets
+    assetsPath.removeWhere((element) => !element.startsWith("assets"));
     if (assetsPath.isEmpty) return [];
 
     /// Remove duplicate assets from [assetsPath]

@@ -61,6 +61,14 @@ $ assets_cleaner clean
 ```shell
 $ assets_cleaner trash
 ```
+
+#### 4. Scan and remove all unused dependencies from your project
+<img src="https://i.ibb.co/bQm6zZb/Screenshot-2023-08-22-135400.png" width="400">
+
+```shell
+$ assets_cleaner scanlib
+```
+
 ## :warning: Supporting Issue
 These tools may not work properly if you use an asset generator like flutter_gen or similar. Because our tools will still detect that your Assets are used, even if these variables are not used in the code
 
