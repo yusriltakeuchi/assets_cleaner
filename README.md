@@ -15,7 +15,7 @@ Works with macOS, Linux and Windows.
 $ dart pub global activate assets_cleaner
 ```
 
-### 2. Setup the config file
+### 2. Setup the config file (Optional for scanlib command)
 
 Run the initialization command to create the config file. This command will create a file named `assets_cleaner.yaml` in your project root directory.
 
