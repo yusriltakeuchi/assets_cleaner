@@ -47,6 +47,7 @@ After setting up the configuration, you can run the package by running the follo
 
 #### 1. Scanning all unused assets from your project
 <img src="https://raw.githubusercontent.com/yusriltakeuchi/assets_cleaner/master/images/image_unused.png" width="400">
+
 ```shell
 $ assets_cleaner unused
 ```
