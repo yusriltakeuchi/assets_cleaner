@@ -4,12 +4,17 @@ version: 0.1.2+7
 homepage: https://github.com/yusriltakeuchi/assets_cleaner.git
 
 environment:
-  sdk: ">=2.19.6 <=3.5.0"
+  sdk: ">=2.19.6 <=3.5.10"
 
 dependencies:
   args: ^2.3.1
   path: ^1.8.0
   yaml: ^3.1.0
+
+platforms:
+  linux:
+  windows:
+  macos:
 
 screenshots:
   - description: "Assets Cleaner Screenshot"

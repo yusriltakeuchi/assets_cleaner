@@ -2,6 +2,18 @@
 - Add feature 'scanlib' command to scan unused library in project
 - Fix bug when the path not contains file name in assets
 
+## [23-08-2023] 0.0.3+9
+
+- Increasing pub scores
+
+## [23-08-2023] 0.0.2+8
+
+- Increasing pub scores
+
+## [23-08-2023] 0.0.2+7
+
+- Update platforms support in pubspec.yaml
+
 ## [22-08-2023] 0.0.2+6
 
 - Add features 'trash' command to move unused assets into trash folder

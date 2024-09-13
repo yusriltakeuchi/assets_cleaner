@@ -1,4 +1,5 @@
 # Assets Cleaner
+[![pub package](https://img.shields.io/pub/v/assets_cleaner.svg)](https://pub.dev/packages/assets_cleaner)
 
 A command-line tool wich helps you to clean your assets folder. It will remove all files that are not used in your project. You can choose to remove all files or just to see which files are not being used.
 This tool support for any assets extensions from your [assets] folder. It will automatically detect the asset location from pubspec.yaml

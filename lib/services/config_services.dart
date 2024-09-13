@@ -5,11 +5,7 @@ class ConfigServices {
   ConfigServices._();
   static final ConfigServices instance = ConfigServices._();
 
-  /// The function `create` downloads a YAML file from a given URL and saves it to a local file.
-  ///
-  /// Returns:
-  ///
-  /// The function `create()` returns a `Future<bool>`.
+  /// Creating assets_cleaner.yaml file
   Future<bool> create() async {
     try {
       String templateUrl =
