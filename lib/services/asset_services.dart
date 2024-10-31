@@ -1,10 +1,13 @@
 import 'package:assets_cleaner/models/unused_asset_model.dart';
 import 'package:assets_cleaner/utils/code_utils.dart';
 import 'package:assets_cleaner/utils/file_utils.dart';
+import 'package:glob/glob.dart';
 
 class AssetServices {
   factory AssetServices() => instance;
+
   AssetServices._();
+
   static final AssetServices instance = AssetServices._();
 
   /// Get list of unused assets from
@@ -74,8 +77,9 @@ class AssetServices {
     List<String> excludedFiles,
     List<String> value,
   ) {
-    for (var file in excludedFiles) {
-      value.removeWhere((item) => item == file);
+    for (var pattern in excludedFiles) {
+      final glob = Glob(pattern);
+      value.removeWhere((item) => glob.matches(item) || item == pattern);
     }
     return value;
   }
