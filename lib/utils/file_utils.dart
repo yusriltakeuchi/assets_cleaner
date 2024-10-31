@@ -3,13 +3,17 @@ import 'package:yaml/yaml.dart';
 
 class FileUtils {
   factory FileUtils() => instance;
+
   FileUtils._();
 
   static final FileUtils instance = FileUtils._();
+
   String get getCurrentPath => Directory.current.absolute.path
       .replaceAll(r'\', '/')
       .replaceAll('//', '/');
+
   String get _getPubspecPath => "${getCurrentPath}/pubspec.yaml";
+
   String get _configFilePath => "${getCurrentPath}/assets_cleaner.yaml";
   YamlMap? config;
 
@@ -106,10 +110,27 @@ class FileUtils {
     }
   }
 
-  /// Load all assets files
+  /// Retrieve all asset files, including diving deep if there are folders inside
   Future<List<FileSystemEntity>> loadAssets(String assetsPath) async {
     final dir = Directory("${getCurrentPath}/$assetsPath");
-    final List<FileSystemEntity> entities = await dir.list().toList();
+    final List<FileSystemEntity> entities = [];
+    if (await dir.exists()) {
+      final List<FileSystemEntity> list = await dir.list().toList();
+
+      for (var entity in list) {
+        if (entity is File && entity.uri.pathSegments.last.contains('.')) {
+          entities.add(entity);
+        } else if (entity is Directory) {
+          final List<FileSystemEntity> subEntities = await loadAssets(
+            entity.path.replaceAll("$getCurrentPath/", ""),
+          );
+          entities.addAll(subEntities);
+        }
+      }
+    } else {
+      print('Directory does not exist: ${dir.path}');
+    }
+
     return entities;
   }
 

@@ -39,6 +39,12 @@ config:
   exclude-file:
   #  - /assets/images/banner_upgrade.png # Uncomment this if you want to use
   #  - /assets/images/logo.png # Uncomment this if you want to use
+  # Support GLOB
+  #  - /assets/images/**
+  #  - /assets/icons/**.jpg
+  #  - /assets/icons/logo/**.png
+  #  - /assets/icons/items/child/**
+  #  - /assets/sound/**/**.mp3
 ```
 
 ## :rocket: Usage

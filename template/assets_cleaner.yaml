@@ -10,6 +10,9 @@ config:
   exclude-file:
   #  - /assets/images/banner_upgrade.png # Uncomment this if you want to use
   #  - /assets/images/logo.png # Uncomment this if you want to use
-  #  - /assets/sounds/** # Support GLOB
+  # Support GLOB
+  #  - /assets/images/**
   #  - /assets/icons/**.jpg
-  #  - /assets/test/**/**.mp3
+  #  - /assets/icons/logo/**.png
+  #  - /assets/icons/items/child/**
+  #  - /assets/sound/**/**.mp3
