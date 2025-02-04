@@ -1,6 +1,9 @@
+import 'package:assets_cleaner/models/gen_model.dart';
 import 'package:assets_cleaner/models/unused_asset_model.dart';
 import 'package:assets_cleaner/utils/code_utils.dart';
 import 'package:assets_cleaner/utils/file_utils.dart';
+import 'package:assets_cleaner/utils/fluttergen_utils.dart';
+import 'package:assets_cleaner/utils/msg_utils.dart';
 import 'package:glob/glob.dart';
 
 class AssetServices {
@@ -35,7 +38,14 @@ class AssetServices {
     for (var path in assetsPath) {
       final files = await fileUtils.loadAssets(path);
       for (var file in files) {
-        assets.add(file.path.replaceAll(currentPath, ""));
+        /// Remove '/' on the first character
+        String assetsPath = file.path.replaceAll(currentPath, "");
+        if (assetsPath.startsWith("/")) {
+          assetsPath = assetsPath.substring(1);
+          assets.add(assetsPath);
+        } else {
+          assets.add(assetsPath);
+        }
       }
     }
 
@@ -48,14 +58,39 @@ class AssetServices {
     assets = _removeExcludedFile(excludeFile, assets);
 
     List<UnusedAssetModel> unusedAssets = [];
-    if (assets.isEmpty) return [];
 
-    print("-----------------------------");
-    print("Scanning ${assets.length} assets file");
-    for (var asset in assets) {
-      final fileName = asset.split("/").last;
-      if (await CodeUtils.instance.containsAsset(fileName) == false) {
-        unusedAssets.add(UnusedAssetModel(fileName: fileName, filePath: asset));
+    if (assets.isNotEmpty) {
+      print("-----------------------------");
+      print("Scanning ${assets.length} assets file");
+      for (var asset in assets) {
+        final fileName = asset.split("/").last;
+        if (await CodeUtils.instance.containsAsset(fileName) == false) {
+          unusedAssets.add(
+            UnusedAssetModel(fileName: fileName, filePath: asset),
+          );
+        }
+      }
+    }
+
+    /// Read fluttergen path from pubspec.yaml
+    String genPath = await fileUtils.getFlutterGenPath();
+
+    /// Get list of assets from flutter_gen
+    List<GenModel> genAssets =
+        await FlutterGenUtils.instance.extractAssetVariables(genPath);
+    if (genAssets.isNotEmpty) {
+      print("-----------------------------");
+      print("Scanning ${genAssets.length} flutter_gen assets variables");
+      MsgUtils.showInfo("Find unused assets from flutter_gen");
+      for (var genAsset in genAssets) {
+        if (await CodeUtils.instance.containsFlutterGenAssets(genAsset) ==
+            false) {
+          MsgUtils.showList("${genAsset.variable}");
+          unusedAssets.add(UnusedAssetModel(
+            fileName: genAsset.path.split("/").last,
+            filePath: genAsset.path,
+          ));
+        }
       }
     }
     return unusedAssets;

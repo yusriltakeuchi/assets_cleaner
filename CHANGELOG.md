@@ -1,3 +1,6 @@
+## [04-02-2025] 0.1.4+10
+- Add support flutter_gen
+
 ## [31-10-2024] 0.1.3+9
 - Add glob support in exclude-file
 - Add deep diving folder scan in assets

@@ -37,6 +37,25 @@ class FileUtils {
     return <String>[];
   }
 
+  /// Read flutter_gen on pubspec.yaml and read output path
+  /// outside 'flutter' key
+  Future<String> getFlutterGenPath() async {
+    final pubspecFile = File(_getPubspecPath);
+    if (await pubspecFile.exists() == true) {
+      final YamlMap map = loadYaml(pubspecFile.readAsStringSync()) as YamlMap;
+      final dynamic flutterGenMap = map['flutter_gen'];
+      if (flutterGenMap is YamlMap) {
+        final dynamic outputMap = flutterGenMap['output'];
+        if (outputMap is String) {
+          return outputMap;
+        }
+      }
+    } else {
+      print("[🚫] pubspec.yaml file not found");
+    }
+    return "";
+  }
+
   /// Takes a file path as input and returns the path without the
   String clearFileNameFromPath(String path) {
     final fileName = _getFileNameFromPath(path);

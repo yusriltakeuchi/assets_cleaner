@@ -85,8 +85,5 @@ or
 $ assets_cleaner scanlib --fast
 ```
 
-## :warning: Supporting Issue
-These tools may not work properly if you use an asset generator like flutter_gen or similar. Because our tools will still detect that your Assets are used, even if these variables are not used in the code
-
 ## :star: Contributing
 If you wish to contribute a change to any of the existing plugins in this repo, please fork the repo and submit a pull request. If you have any questions, please open an issue.
