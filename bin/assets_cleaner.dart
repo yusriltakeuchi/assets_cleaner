@@ -1,9 +1,5 @@
 import 'package:args/command_runner.dart';
-import 'package:assets_cleaner/commands/clean_command.dart';
-import 'package:assets_cleaner/commands/init_command.dart';
-import 'package:assets_cleaner/commands/scanlib_command.dart';
-import 'package:assets_cleaner/commands/trash_command.dart';
-import 'package:assets_cleaner/commands/unused_command.dart';
+import 'package:assets_cleaner/commands/command.dart';
 
 void main(List<String> args) {
   /// Initializing commands

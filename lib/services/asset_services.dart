@@ -16,7 +16,7 @@ class AssetServices {
   /// Get list of unused assets from
   Future<List<UnusedAssetModel>> getUnusedAssets() async {
     String currentPath = FileUtils.instance.getCurrentPath;
-    final fileUtils = FileUtils();
+    final fileUtils = FileUtils.instance;
 
     /// Read assets path from pubspec.yaml
     List<String> assetsPath = await fileUtils.getPubspecAsset();
@@ -93,7 +93,24 @@ class AssetServices {
         }
       }
     }
+
+    /// Remove duplicate assets from [unusedAssets] by filePath
+    unusedAssets = _removeDuplicateAssets(unusedAssets);
     return unusedAssets;
+  }
+
+  List<UnusedAssetModel> _removeDuplicateAssets(
+    List<UnusedAssetModel> unusedAssets,
+  ) {
+    return unusedAssets
+        .asMap()
+        .entries
+        .where((entry) =>
+            unusedAssets
+                .indexWhere((a) => a.filePath == entry.value.filePath) ==
+            entry.key)
+        .map((e) => e.value)
+        .toList();
   }
 
   /// Remove exclude extension from assets

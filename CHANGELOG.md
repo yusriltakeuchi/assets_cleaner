@@ -1,3 +1,6 @@
+## [05-02-2025] 0.1.5+11
+- Add support detect commented code in dart file
+
 ## [04-02-2025] 0.1.4+10
 - Add support flutter_gen
 

@@ -32,7 +32,44 @@ class CodeUtils {
     for (var code in libCodes) {
       final path = code.path.replaceAll(currentPath, "");
       final content = File("$currentPath$path").readAsStringSync();
-      if (content.contains(asset)) {
+      if (await _containsUncommentedAsset(content, asset)) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  /// The function checks whether the asset is used in the code.
+  Future<bool> _containsUncommentedAsset(String content, String asset) async {
+    final lines = content.split('\n');
+    bool inMultilineComment = false;
+
+    for (var line in lines) {
+      line = line.trim();
+
+      /// Skip empty lines
+      if (line.isEmpty) continue;
+
+      /// Check for multiline comment start
+      if (line.startsWith('/*')) {
+        inMultilineComment = true;
+        continue;
+      }
+
+      /// Check for multiline comment end
+      if (line.endsWith('*/')) {
+        inMultilineComment = false;
+        continue;
+      }
+
+      /// Skip if we're inside a multiline comment
+      if (inMultilineComment) continue;
+
+      /// Remove inline comments
+      line = line.replaceAll(RegExp(r'//.*$'), '');
+
+      /// Check if the asset is in the remaining line
+      if (line.contains(asset)) {
         return true;
       }
     }
@@ -49,7 +86,7 @@ class CodeUtils {
       final path = libCodes[i].path.replaceAll(currentPath, "");
       if (path.endsWith('.gen.dart')) continue;
       final content = File("$currentPath$path").readAsStringSync();
-      if (content.contains(genAsset.variable)) {
+      if (await _containsUncommentedAsset(content, genAsset.variable)) {
         return true;
       }
     }
