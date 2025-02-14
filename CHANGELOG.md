@@ -1,3 +1,6 @@
+## [14-02-2025] 0.1.5+12
+- Increase SDK Version to support latest Flutter version
+
 ## [05-02-2025] 0.1.5+11
 - Add support detect commented code in dart file
 
@@ -9,7 +12,7 @@
 - Add deep diving folder scan in assets
 
 ## [13-09-2024] 0.1.2+8
-- Increasig pub scores
+- Increasing pub scores
 
 ## [13-09-2024] 0.1.2+7
 - Add feature 'scanlib' command to scan unused library in project
